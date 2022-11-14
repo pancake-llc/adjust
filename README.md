@@ -1,13 +1,12 @@
 # What
-- Template use for setup setting you need for create unity package
-- Replace your setting in file package.json
+- Adjust SDK for Unity
 
 
 # How To Install Package
 
 Add the lines below to `Packages/manifest.json`
 
-for version x.x.x
+for version 4.32.1
 ```csharp
-"com.pancake.__package_name__": "https://github.com/pancake-llc/packagename.git#x.x.x",
+"com.pancake.adjust": "https://github.com/pancake-llc/adjust.git#4.32.1",
 ```
