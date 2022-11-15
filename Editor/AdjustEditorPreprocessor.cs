@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿#if UNITY_EDITOR
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ using System.Xml;
 using System;
 using System.Text.RegularExpressions;
 using System.Linq;
+using UnityEditor.Build.Reporting;
 
 #if UNITY_2018_1_OR_NEWER
 public class AdjustEditorPreprocessor : IPreprocessBuildWithReport
@@ -23,7 +25,7 @@ public class AdjustEditorPreprocessor : IPreprocessBuild
         }
     }
 #if UNITY_2018_1_OR_NEWER
-    public void OnPreprocessBuild(UnityEditor.Build.Reporting.BuildReport report)
+    public void OnPreprocessBuild(BuildReport report)
     {
         OnPreprocessBuild(report.summary.platform, string.Empty);
     }
@@ -98,7 +100,7 @@ public class AdjustEditorPreprocessor : IPreprocessBuild
 
             Debug.Log("[Adjust]: App's AndroidManifest.xml file check and potential modification completed.");
             Debug.Log("[Adjust]: Please check if any error message was displayed during this process "
-                                    + "and make sure to fix all issues in order to properly use the Adjust SDK in your app.");
+                      + "and make sure to fix all issues in order to properly use the Adjust SDK in your app.");
         }
         else
         {
@@ -363,3 +365,5 @@ public class AdjustEditorPreprocessor : IPreprocessBuild
     }
 #endif
 }
+
+#endif
