@@ -1,6 +1,8 @@
+#if UNITY_EDITOR
 // Inspired by: https://github.com/facebook/facebook-sdk-for-unity/blob/master/Facebook.Unity.Settings/FacebookSettings.cs
 
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,13 +13,13 @@ public class AdjustSettings : ScriptableObject
     [SerializeField]
     private bool _iOSFrameworkAdSupport = true;
     [SerializeField]
-    private bool _iOSFrameworkiAd = false;
+    private bool _iOSFrameworkiAd = true;
     [SerializeField]
-    private bool _iOSFrameworkAdServices = false;
+    private bool _iOSFrameworkAdServices = true;
     [SerializeField]
-    private bool _iOSFrameworkAppTrackingTransparency = false;
+    private bool _iOSFrameworkAppTrackingTransparency = true;
     [SerializeField]
-    private bool _iOSFrameworkStoreKit = false;
+    private bool _iOSFrameworkStoreKit = true;
     [SerializeField]
     private bool _androidPermissionInternet = true;
     [SerializeField]
@@ -46,14 +48,10 @@ public class AdjustSettings : ScriptableObject
             if (instance == null)
             {
                 // Create AdjustSettings.asset inside the folder in which AdjustSettings.cs reside.
-                instance = ScriptableObject.CreateInstance<AdjustSettings>();
-                var guids = AssetDatabase.FindAssets(string.Format("{0} t:script", "AdjustSettings"));
-                if (guids == null || guids.Length <= 0)
-                {
-                    return instance;
-                }
-                var assetPath = AssetDatabase.GUIDToAssetPath(guids[0]).Replace("AdjustSettings.cs", "AdjustSettings.asset");
-                AssetDatabase.CreateAsset(instance, assetPath);
+                instance = CreateInstance<AdjustSettings>();
+                var path = "Assets/_Root/Editor/";
+                if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+                AssetDatabase.CreateAsset(instance, path + "AdjustSettings.asset");
             }
 
             return instance;
@@ -163,3 +161,5 @@ public class AdjustSettings : ScriptableObject
         set { Instance.androidUriSchemes = value; }
     }
 }
+
+#endif

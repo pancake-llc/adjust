@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System;
 using System.IO;
 using System.Linq;
@@ -13,83 +14,7 @@ using UnityEditor.iOS.Xcode;
 
 public class AdjustEditor : AssetPostprocessor
 {
-    [MenuItem("Assets/Adjust/Export Unity Package")]
-    public static void ExportAdjustUnityPackage()
-    {
-        string exportedFileName = "Adjust.unitypackage";
-        string assetsPath = "Assets/Adjust";
-        List<string> assetsToExport = new List<string>();
 
-        // Adjust Assets.
-        assetsToExport.Add(assetsPath + "/3rd Party/SimpleJSON.cs");
-
-        assetsToExport.Add(assetsPath + "/Android/adjust-android.jar");
-        assetsToExport.Add(assetsPath + "/Android/AdjustAndroid.cs");
-        assetsToExport.Add(assetsPath + "/Android/AdjustAndroidManifest.xml");
-
-        assetsToExport.Add(assetsPath + "/Editor/AdjustEditor.cs");
-        assetsToExport.Add(assetsPath + "/Editor/AdjustSettings.cs");
-        assetsToExport.Add(assetsPath + "/Editor/AdjustSettingsEditor.cs");
-        assetsToExport.Add(assetsPath + "/Editor/AdjustCustomEditor.cs");
-        assetsToExport.Add(assetsPath + "/Editor/AdjustEditorPreprocessor.cs");
-
-        assetsToExport.Add(assetsPath + "/ExampleGUI/ExampleGUI.cs");
-        assetsToExport.Add(assetsPath + "/ExampleGUI/ExampleGUI.prefab");
-        assetsToExport.Add(assetsPath + "/ExampleGUI/ExampleGUI.unity");
-
-        assetsToExport.Add(assetsPath + "/iOS/ADJAttribution.h");
-        assetsToExport.Add(assetsPath + "/iOS/ADJConfig.h");
-        assetsToExport.Add(assetsPath + "/iOS/ADJEvent.h");
-        assetsToExport.Add(assetsPath + "/iOS/ADJEventFailure.h");
-        assetsToExport.Add(assetsPath + "/iOS/ADJEventSuccess.h");
-        assetsToExport.Add(assetsPath + "/iOS/ADJLogger.h");
-        assetsToExport.Add(assetsPath + "/iOS/ADJSessionFailure.h");
-        assetsToExport.Add(assetsPath + "/iOS/ADJSessionSuccess.h");
-        assetsToExport.Add(assetsPath + "/iOS/ADJSubscription.h");
-        assetsToExport.Add(assetsPath + "/iOS/Adjust.h");
-        assetsToExport.Add(assetsPath + "/iOS/AdjustiOS.cs");
-        assetsToExport.Add(assetsPath + "/iOS/AdjustSdk.a");
-        assetsToExport.Add(assetsPath + "/iOS/AdjustUnity.h");
-        assetsToExport.Add(assetsPath + "/iOS/AdjustUnity.mm");
-        assetsToExport.Add(assetsPath + "/iOS/AdjustUnityDelegate.h");
-        assetsToExport.Add(assetsPath + "/iOS/AdjustUnityDelegate.mm");
-
-        assetsToExport.Add(assetsPath + "/Prefab/Adjust.prefab");
-
-        assetsToExport.Add(assetsPath + "/Unity/Adjust.cs");
-        assetsToExport.Add(assetsPath + "/Unity/AdjustAppStoreSubscription.cs");
-        assetsToExport.Add(assetsPath + "/Unity/AdjustAttribution.cs");
-        assetsToExport.Add(assetsPath + "/Unity/AdjustConfig.cs");
-        assetsToExport.Add(assetsPath + "/Unity/AdjustEnvironment.cs");
-        assetsToExport.Add(assetsPath + "/Unity/AdjustEvent.cs");
-        assetsToExport.Add(assetsPath + "/Unity/AdjustEventFailure.cs");
-        assetsToExport.Add(assetsPath + "/Unity/AdjustEventSuccess.cs");
-        assetsToExport.Add(assetsPath + "/Unity/AdjustLogLevel.cs");
-        assetsToExport.Add(assetsPath + "/Unity/AdjustPlayStoreSubscription.cs");
-        assetsToExport.Add(assetsPath + "/Unity/AdjustSessionFailure.cs");
-        assetsToExport.Add(assetsPath + "/Unity/AdjustSessionSuccess.cs");
-        assetsToExport.Add(assetsPath + "/Unity/AdjustUtils.cs");
-
-        assetsToExport.Add(assetsPath + "/Windows/AdjustWindows.cs");
-        assetsToExport.Add(assetsPath + "/Windows/WindowsPcl.dll");
-        assetsToExport.Add(assetsPath + "/Windows/WindowsUap.dll");
-        assetsToExport.Add(assetsPath + "/Windows/Stubs/Win10Interface.dll");
-        assetsToExport.Add(assetsPath + "/Windows/Stubs/Win81Interface.dll");
-        assetsToExport.Add(assetsPath + "/Windows/Stubs/WinWsInterface.dll");
-        assetsToExport.Add(assetsPath + "/Windows/W81/AdjustWP81.dll");
-        assetsToExport.Add(assetsPath + "/Windows/W81/Win81Interface.dll");
-        assetsToExport.Add(assetsPath + "/Windows/WS/AdjustWS.dll");
-        assetsToExport.Add(assetsPath + "/Windows/WS/WinWsInterface.dll");
-        assetsToExport.Add(assetsPath + "/Windows/WU10/AdjustUAP10.dll");
-        assetsToExport.Add(assetsPath + "/Windows/WU10/Win10Interface.dll");
-        assetsToExport.Add(assetsPath + "/Windows/Newtonsoft.Json.dll");
-
-        AssetDatabase.ExportPackage(
-            assetsToExport.ToArray(),
-            exportedFileName,
-            ExportPackageOptions.IncludeDependencies | ExportPackageOptions.Interactive);
-    }
-    
     [PostProcessBuild]
     public static void OnPostprocessBuild(BuildTarget target, string projectPath)
     {
@@ -351,3 +276,5 @@ public class AdjustEditor : AssetPostprocessor
     }
 #endif
 }
+
+#endif
