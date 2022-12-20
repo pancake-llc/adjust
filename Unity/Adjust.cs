@@ -15,13 +15,13 @@ namespace com.adjust.sdk
         // [Tooltip("If selected, it is expected from you to initialize Adjust SDK from your app code. " +
         //     "Any SDK configuration settings from prefab will be ignored in that case.")]
         [HideInInspector]
-        public bool startManually = true;
+        public bool startManually = false;
         [HideInInspector]
         public string appToken;
         [HideInInspector]
-        public AdjustEnvironment environment = AdjustEnvironment.Sandbox;
+        public AdjustEnvironment environment = AdjustEnvironment.Production;
         [HideInInspector]
-        public AdjustLogLevel logLevel = AdjustLogLevel.Info;
+        public AdjustLogLevel logLevel = AdjustLogLevel.Error;
         [HideInInspector]
         public bool eventBuffering = false;
         [HideInInspector]
