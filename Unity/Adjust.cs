@@ -14,65 +14,40 @@ namespace com.adjust.sdk
         // [Space(5)]
         // [Tooltip("If selected, it is expected from you to initialize Adjust SDK from your app code. " +
         //     "Any SDK configuration settings from prefab will be ignored in that case.")]
-        [HideInInspector]
-        public bool startManually = false;
-        [HideInInspector]
-        public string appToken;
-        [HideInInspector]
-        public AdjustEnvironment environment = AdjustEnvironment.Production;
-        [HideInInspector]
-        public AdjustLogLevel logLevel = AdjustLogLevel.Error;
-        [HideInInspector]
-        public bool eventBuffering = false;
-        [HideInInspector]
-        public bool sendInBackground = false;
-        [HideInInspector]
-        public bool launchDeferredDeeplink = true;
-        [HideInInspector]
-        public bool needsCost = false;
-        [HideInInspector]
-        public bool coppaCompliant = false;
-        [HideInInspector]
-        public bool linkMe = false;
-        [HideInInspector]
-        public string defaultTracker;
-        [HideInInspector]
-        public AdjustUrlStrategy urlStrategy = AdjustUrlStrategy.Default;
-        [HideInInspector]
-        public double startDelay = 0;
+        [HideInInspector] public bool startManually = true;
+        [HideInInspector] public string appToken;
+        [HideInInspector] public AdjustEnvironment environment = AdjustEnvironment.Production;
+        [HideInInspector] public AdjustLogLevel logLevel = AdjustLogLevel.Error;
+        [HideInInspector] public bool eventBuffering = false;
+        [HideInInspector] public bool sendInBackground = false;
+        [HideInInspector] public bool launchDeferredDeeplink = true;
+        [HideInInspector] public bool needsCost = false;
+        [HideInInspector] public bool coppaCompliant = false;
+        [HideInInspector] public bool linkMe = false;
+        [HideInInspector] public string defaultTracker;
+        [HideInInspector] public AdjustUrlStrategy urlStrategy = AdjustUrlStrategy.Default;
+        [HideInInspector] public double startDelay = 0;
 
         // [Header("APP SECRET:")]
         // [Space(5)]
-        [HideInInspector]
-        public long secretId = 0;
-        [HideInInspector]
-        public long info1 = 0;
-        [HideInInspector]
-        public long info2 = 0;
-        [HideInInspector]
-        public long info3 = 0;
-        [HideInInspector]
-        public long info4 = 0;
+        [HideInInspector] public long secretId = 0;
+        [HideInInspector] public long info1 = 0;
+        [HideInInspector] public long info2 = 0;
+        [HideInInspector] public long info3 = 0;
+        [HideInInspector] public long info4 = 0;
 
         // [Header("ANDROID SPECIFIC FEATURES:")]
         // [Space(5)]
-        [HideInInspector]
-        public bool preinstallTracking = false;
-        [HideInInspector]
-        public string preinstallFilePath;
-        [HideInInspector]
-        public bool playStoreKidsApp = false;
+        [HideInInspector] public bool preinstallTracking = false;
+        [HideInInspector] public string preinstallFilePath;
+        [HideInInspector] public bool playStoreKidsApp = false;
 
         // [Header("iOS SPECIFIC FEATURES:")]
         // [Space(5)]
-        [HideInInspector]
-        public bool iadInfoReading = true;
-        [HideInInspector]
-        public bool adServicesInfoReading = true;
-        [HideInInspector]
-        public bool idfaInfoReading = true;
-        [HideInInspector]
-        public bool skAdNetworkHandling = true;
+        [HideInInspector] public bool iadInfoReading = true;
+        [HideInInspector] public bool adServicesInfoReading = true;
+        [HideInInspector] public bool idfaInfoReading = true;
+        [HideInInspector] public bool skAdNetworkHandling = true;
 
 #if UNITY_IOS
         // Delegate references for iOS callback triggering
@@ -106,7 +81,7 @@ namespace com.adjust.sdk
                 Adjust.appWillOpenUrl(Application.absoluteURL);
             }
 #endif
-
+            
             if (!this.startManually)
             {
                 AdjustConfig adjustConfig = new AdjustConfig(this.appToken, this.environment, (this.logLevel == AdjustLogLevel.Suppress));
@@ -135,6 +110,17 @@ namespace com.adjust.sdk
             }
         }
 
+        public static void StartTracking(string appToken, AdjustEnvironment environment, AdjustLogLevel logLevel)
+        {
+            var adjustConfig = new AdjustConfig(appToken, environment, (logLevel == AdjustLogLevel.Suppress));
+            adjustConfig.setLogLevel(logLevel);
+            adjustConfig.setAllowiAdInfoReading(true);
+            adjustConfig.setAllowAdServicesInfoReading(true);
+            adjustConfig.setAllowIdfaReading(true);
+
+            Adjust.start(adjustConfig);
+        }
+
         void OnApplicationPause(bool pauseStatus)
         {
             if (IsEditor())
@@ -143,7 +129,7 @@ namespace com.adjust.sdk
             }
 
 #if UNITY_IOS
-                // No action, iOS SDK is subscribed to iOS lifecycle notifications.
+            // No action, iOS SDK is subscribed to iOS lifecycle notifications.
 #elif UNITY_ANDROID
                 if (pauseStatus)
                 {
@@ -595,6 +581,7 @@ namespace com.adjust.sdk
             {
                 Adjust.authorizationStatusDelegates = new List<Action<int>>();
             }
+
             Adjust.authorizationStatusDelegates.Add(statusCallback);
             AdjustiOS.RequestTrackingAuthorizationWithCompletionHandler(sceneName);
 #elif UNITY_ANDROID
@@ -1081,6 +1068,7 @@ namespace com.adjust.sdk
             {
                 callback(Int16.Parse(authorizationStatus));
             }
+
             Adjust.authorizationStatusDelegates.Clear();
         }
 #endif
