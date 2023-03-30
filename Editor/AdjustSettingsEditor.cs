@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -25,20 +26,27 @@ namespace com.adjust.sdk
 
         void OnEnable()
         {
-            iOSFrameworkAdSupport = serializedObject.FindProperty("_iOSFrameworkAdSupport");
-            iOSFrameworkiAd = serializedObject.FindProperty("_iOSFrameworkiAd");
-            iOSFrameworkAdServices = serializedObject.FindProperty("_iOSFrameworkAdServices");
-            iOSFrameworkAppTrackingTransparency = serializedObject.FindProperty("_iOSFrameworkAppTrackingTransparency");
-            iOSFrameworkStoreKit = serializedObject.FindProperty("_iOSFrameworkStoreKit");
-            androidPermissionInternet = serializedObject.FindProperty("_androidPermissionInternet");
-            androidPermissionInstallReferrerService = serializedObject.FindProperty("_androidPermissionInstallReferrerService");
-            androidPermissionAdId = serializedObject.FindProperty("_androidPermissionAdId");
-            androidPermissionAccessNetworkState = serializedObject.FindProperty("_androidPermissionAccessNetworkState");
-            iOSUserTrackingUsageDescription = serializedObject.FindProperty("_iOSUserTrackingUsageDescription");
-            iOSUrlIdentifier = serializedObject.FindProperty("_iOSUrlIdentifier");
-            iOSUrlSchemes = serializedObject.FindProperty("_iOSUrlSchemes");
-            iOSUniversalLinksDomains = serializedObject.FindProperty("_iOSUniversalLinksDomains");
-            androidUriSchemes = serializedObject.FindProperty("androidUriSchemes");
+            try
+            {
+                iOSFrameworkAdSupport = serializedObject.FindProperty("_iOSFrameworkAdSupport");
+                iOSFrameworkiAd = serializedObject.FindProperty("_iOSFrameworkiAd");
+                iOSFrameworkAdServices = serializedObject.FindProperty("_iOSFrameworkAdServices");
+                iOSFrameworkAppTrackingTransparency = serializedObject.FindProperty("_iOSFrameworkAppTrackingTransparency");
+                iOSFrameworkStoreKit = serializedObject.FindProperty("_iOSFrameworkStoreKit");
+                androidPermissionInternet = serializedObject.FindProperty("_androidPermissionInternet");
+                androidPermissionInstallReferrerService = serializedObject.FindProperty("_androidPermissionInstallReferrerService");
+                androidPermissionAdId = serializedObject.FindProperty("_androidPermissionAdId");
+                androidPermissionAccessNetworkState = serializedObject.FindProperty("_androidPermissionAccessNetworkState");
+                iOSUserTrackingUsageDescription = serializedObject.FindProperty("_iOSUserTrackingUsageDescription");
+                iOSUrlIdentifier = serializedObject.FindProperty("_iOSUrlIdentifier");
+                iOSUrlSchemes = serializedObject.FindProperty("_iOSUrlSchemes");
+                iOSUniversalLinksDomains = serializedObject.FindProperty("_iOSUniversalLinksDomains");
+                androidUriSchemes = serializedObject.FindProperty("androidUriSchemes");
+            }
+            catch (Exception)
+            {
+               //
+            }
         }
         public override void OnInspectorGUI()
         {
