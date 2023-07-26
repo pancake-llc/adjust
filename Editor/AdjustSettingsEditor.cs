@@ -10,7 +10,6 @@ namespace com.adjust.sdk
     public class AdjustSettingsEditor : Editor
     {
         SerializedProperty iOSFrameworkAdSupport;
-        SerializedProperty iOSFrameworkiAd;
         SerializedProperty iOSFrameworkAdServices;
         SerializedProperty iOSFrameworkAppTrackingTransparency;
         SerializedProperty iOSFrameworkStoreKit;
@@ -29,7 +28,6 @@ namespace com.adjust.sdk
             try
             {
                 iOSFrameworkAdSupport = serializedObject.FindProperty("_iOSFrameworkAdSupport");
-                iOSFrameworkiAd = serializedObject.FindProperty("_iOSFrameworkiAd");
                 iOSFrameworkAdServices = serializedObject.FindProperty("_iOSFrameworkAdServices");
                 iOSFrameworkAppTrackingTransparency = serializedObject.FindProperty("_iOSFrameworkAppTrackingTransparency");
                 iOSFrameworkStoreKit = serializedObject.FindProperty("_iOSFrameworkStoreKit");
@@ -59,10 +57,6 @@ namespace com.adjust.sdk
             EditorGUILayout.PropertyField(iOSFrameworkAdSupport,
                 new GUIContent("AdSupport.framework",
                     "iOS framework needed to access IDFA value"),
-                true);
-            EditorGUILayout.PropertyField(iOSFrameworkiAd,
-                new GUIContent("iAd.framework",
-                    "iOS framework needed to support iAd based Apple Search Ads attribution"),
                 true);
             EditorGUILayout.PropertyField(iOSFrameworkAdServices,
                 new GUIContent("AdServices.framework",

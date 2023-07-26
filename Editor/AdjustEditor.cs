@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 using System;
 using System.IO;
 using System.Linq;
@@ -14,7 +13,6 @@ using UnityEditor.iOS.Xcode;
 
 public class AdjustEditor : AssetPostprocessor
 {
-
     [PostProcessBuild]
     public static void OnPostprocessBuild(BuildTarget target, string projectPath)
     {
@@ -47,7 +45,6 @@ public class AdjustEditor : AssetPostprocessor
 
             // If enabled by the user, Adjust SDK will try to add following frameworks to your project:
             // - AdSupport.framework (needed for access to IDFA value)
-            // - iAd.framework (needed in case you are running ASA campaigns)
             // - AdServices.framework (needed in case you are running ASA campaigns)
             // - StoreKit.framework (needed for communication with SKAdNetwork framework)
             // - AppTrackingTransparency.framework (needed for information about user's consent to be tracked)
@@ -62,16 +59,6 @@ public class AdjustEditor : AssetPostprocessor
             else
             {
                 Debug.Log("[Adjust]: Skipping AdSupport.framework linking.");
-            }
-            if (AdjustSettings.iOSFrameworkiAd)
-            {
-                Debug.Log("[Adjust]: Adding iAd.framework to Xcode project.");
-                xcodeProject.AddFrameworkToProject(xcodeTarget, "iAd.framework", true);
-                Debug.Log("[Adjust]: iAd.framework added successfully.");
-            }
-            else
-            {
-                Debug.Log("[Adjust]: Skipping iAd.framework linking.");
             }
             if (AdjustSettings.iOSFrameworkAdServices)
             {
@@ -276,5 +263,3 @@ public class AdjustEditor : AssetPostprocessor
     }
 #endif
 }
-
-#endif

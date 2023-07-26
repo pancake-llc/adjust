@@ -44,7 +44,6 @@ namespace com.adjust.sdk
 
         // [Header("iOS SPECIFIC FEATURES:")]
         // [Space(5)]
-        [HideInInspector] public bool iadInfoReading = true;
         [HideInInspector] public bool adServicesInfoReading = true;
         [HideInInspector] public bool idfaInfoReading = true;
         [HideInInspector] public bool skAdNetworkHandling = true;
@@ -81,7 +80,7 @@ namespace com.adjust.sdk
                 Adjust.appWillOpenUrl(Application.absoluteURL);
             }
 #endif
-            
+
             if (!this.startManually)
             {
                 AdjustConfig adjustConfig = new AdjustConfig(this.appToken, this.environment, (this.logLevel == AdjustLogLevel.Suppress));
@@ -96,7 +95,6 @@ namespace com.adjust.sdk
                 adjustConfig.setNeedsCost(this.needsCost);
                 adjustConfig.setPreinstallTrackingEnabled(this.preinstallTracking);
                 adjustConfig.setPreinstallFilePath(this.preinstallFilePath);
-                adjustConfig.setAllowiAdInfoReading(this.iadInfoReading);
                 adjustConfig.setAllowAdServicesInfoReading(this.adServicesInfoReading);
                 adjustConfig.setAllowIdfaReading(this.idfaInfoReading);
                 adjustConfig.setCoppaCompliantEnabled(this.coppaCompliant);
@@ -114,7 +112,6 @@ namespace com.adjust.sdk
         {
             var adjustConfig = new AdjustConfig(appToken, environment, (logLevel == AdjustLogLevel.Suppress));
             adjustConfig.setLogLevel(logLevel);
-            adjustConfig.setAllowiAdInfoReading(true);
             adjustConfig.setAllowAdServicesInfoReading(true);
             adjustConfig.setAllowIdfaReading(true);
 
@@ -129,7 +126,7 @@ namespace com.adjust.sdk
             }
 
 #if UNITY_IOS
-            // No action, iOS SDK is subscribed to iOS lifecycle notifications.
+                // No action, iOS SDK is subscribed to iOS lifecycle notifications.
 #elif UNITY_ANDROID
                 if (pauseStatus)
                 {
@@ -581,7 +578,6 @@ namespace com.adjust.sdk
             {
                 Adjust.authorizationStatusDelegates = new List<Action<int>>();
             }
-
             Adjust.authorizationStatusDelegates.Add(statusCallback);
             AdjustiOS.RequestTrackingAuthorizationWithCompletionHandler(sceneName);
 #elif UNITY_ANDROID
@@ -1068,7 +1064,6 @@ namespace com.adjust.sdk
             {
                 callback(Int16.Parse(authorizationStatus));
             }
-
             Adjust.authorizationStatusDelegates.Clear();
         }
 #endif
