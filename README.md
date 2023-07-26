@@ -10,3 +10,8 @@ for version `4.33.2`
 ```csharp
 "com.pancake.adjust": "https://github.com/pancake-llc/adjust.git#4.33.2",
 ```
+
+
+# Notes
+
+Signature v2 should be placed in `Plugins/Android` for android and `Plugins/iOS` for iOS instead of the old `Adjust` folder for easy management.
