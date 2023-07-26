@@ -60,8 +60,6 @@ public class AdjustEditorPreprocessor : IPreprocessBuild
 
             isAdjustManifestUsed = true;
             File.Copy(adjustManifestPath, appManifestPath);
-            
-            Debug.Log(adjustManifestPath);
 
             Debug.Log("[Adjust]: User defined AndroidManifest.xml file not found in Plugins/Android folder.");
             Debug.Log("[Adjust]: Creating default app's AndroidManifest.xml from AdjustAndroidManifest.xml file.");
