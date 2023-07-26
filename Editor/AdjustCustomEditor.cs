@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor.SceneManagement;
 using UnityEditor;
@@ -82,3 +81,5 @@ namespace com.adjust.sdk
         }
     }
 }
+
+#endif

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿#if UNITY_EDITOR
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ using System.Xml;
 using System;
 using System.Text.RegularExpressions;
 using System.Linq;
+using UnityEditor.Build.Reporting;
 
 #if UNITY_2018_1_OR_NEWER
 public class AdjustEditorPreprocessor : IPreprocessBuildWithReport
@@ -23,7 +25,7 @@ public class AdjustEditorPreprocessor : IPreprocessBuild
         }
     }
 #if UNITY_2018_1_OR_NEWER
-    public void OnPreprocessBuild(UnityEditor.Build.Reporting.BuildReport report)
+    public void OnPreprocessBuild(BuildReport report)
     {
         OnPreprocessBuild(report.summary.platform, string.Empty);
     }
@@ -44,7 +46,7 @@ public class AdjustEditorPreprocessor : IPreprocessBuild
     {
         var isAdjustManifestUsed = false;
         var androidPluginsPath = Path.Combine(Application.dataPath, "Plugins/Android");
-        var adjustManifestPath = Path.Combine(Application.dataPath, "Adjust/Android/AdjustAndroidManifest.xml");
+        var adjustManifestPath = Path.GetFullPath("Packages/com.pancake.adjust/Android/AdjustAndroidManifest.xml");
         var appManifestPath = Path.Combine(Application.dataPath, "Plugins/Android/AndroidManifest.xml");
 
         // Check if user has already created AndroidManifest.xml file in its location.
@@ -58,6 +60,8 @@ public class AdjustEditorPreprocessor : IPreprocessBuild
 
             isAdjustManifestUsed = true;
             File.Copy(adjustManifestPath, appManifestPath);
+            
+            Debug.Log(adjustManifestPath);
 
             Debug.Log("[Adjust]: User defined AndroidManifest.xml file not found in Plugins/Android folder.");
             Debug.Log("[Adjust]: Creating default app's AndroidManifest.xml from AdjustAndroidManifest.xml file.");
@@ -363,3 +367,5 @@ public class AdjustEditorPreprocessor : IPreprocessBuild
     }
 #endif
 }
+
+#endif
