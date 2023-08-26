@@ -6,9 +6,9 @@
 
 Add the lines below to `Packages/manifest.json`
 
-for version `4.33.2`
+for version `4.34.0`
 ```csharp
-"com.pancake.adjust": "https://github.com/pancake-llc/adjust.git#4.33.2",
+"com.pancake.adjust": "https://github.com/pancake-llc/adjust.git#4.34.0",
 ```
 
 
