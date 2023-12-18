@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 // Inspired by: https://github.com/facebook/facebook-sdk-for-unity/blob/master/Facebook.Unity.Settings/FacebookSettings.cs
 
 using System.Collections.Generic;
